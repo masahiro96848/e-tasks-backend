@@ -1,0 +1,21 @@
+{
+  "recommendations": [
+    "gruntfuggly.todo-tree",
+    "streetsidesoftware.code-spell-checker",
+    "mikestead.dotenv",
+    "dracula-theme.theme-dracula",
+    "dbaeumer.vscode-eslint",
+    "mquandalle.graphql",
+    "graphql.vscode-graphql",
+    "graphql.vscode-graphql-syntax",
+    "capaj.graphql-codegen-vscode",
+    "equinusocio.vsc-material-theme-icons",
+    "formulahendry.vscode-mysql",
+    "abhijoybasak.nestjs-files",
+    "jakebathman.mysql-syntax",
+    "sysoev.vscode-open-in-github",
+    "esbenp.prettier-vscode",
+    "prisma.prisma",
+    "dsznajder.es7-react-js-snippets"
+  ]
+}

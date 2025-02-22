@@ -65,7 +65,22 @@ async function main() {
     skipDuplicates: true, // 重複をスキップする場合
   });
 
-  console.log('初期ユーザーデータが作成されました。');
+  // Todoデータを追加
+  const todos = [
+    { title: 'ユーザー1のTodo1', description: '詳細1', userId: 1 },
+    { title: 'ユーザー1のTodo2', description: '詳細2', userId: 1 },
+    { title: 'ユーザー1のTodo3', description: '詳細3', userId: 1 },
+    { title: 'ユーザー2のTodo1', description: '詳細1', userId: 2 },
+    { title: 'ユーザー2のTodo2', description: '詳細2', userId: 2 },
+    { title: 'ユーザー3のTodo1', description: '詳細1', userId: 3 },
+  ];
+
+  await prisma.todo.createMany({
+    data: todos,
+    skipDuplicates: true,
+  });
+
+  console.log('初期UserデータとTodoデータが作成されました。');
 }
 
 main()
