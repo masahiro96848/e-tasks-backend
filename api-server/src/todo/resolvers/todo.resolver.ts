@@ -7,7 +7,7 @@ export class TodoResolver {
   constructor(private readonly findManyTodosUsecase: FindManyTodosUsecase) {}
 
   @Query(() => [Todo], { description: 'Todo一覧取得' })
-  getTodos(): Promise<Todo[]> {
+  todos(): Promise<Todo[]> {
     return this.findManyTodosUsecase.handle({});
   }
 }

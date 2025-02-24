@@ -18,5 +18,5 @@ scalar DateTime
 
 type Query {
   """Todo一覧取得"""
-  getTodos: [Todo!]!
+  todos: [Todo!]!
 }
