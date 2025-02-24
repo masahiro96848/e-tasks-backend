@@ -17,7 +17,7 @@ export class FindManyTodosService {
     orderBy?: Prisma.TodoOrderByWithRelationInput;
     trx?: Prisma.TransactionClient;
   }): Promise<Prisma.TodoGetPayload<{ include: T }>[]> {
-    return this.todoRepository.findWithInclude({
+    return this.todoRepository.findManyWithInclude({
       where,
       include,
       orderBy,
