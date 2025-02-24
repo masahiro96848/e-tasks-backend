@@ -5,6 +5,7 @@ import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TodoModule } from './todo/todo.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { TodoModule } from './todo/todo.module';
       playground: true,
     }),
     TodoModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
