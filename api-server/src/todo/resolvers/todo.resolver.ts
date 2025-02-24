@@ -1,28 +1,32 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-// import { Todo } from '../models/todo.model';
-import { FindManyTodosUsecase } from '../usecase/find-many-todos.usecase';
-import { Prisma, PrismaPromise } from '@prisma/client';
-import { CreateTodoUsecase } from '../usecase/create-todo.usecase';
-import { TodoModel } from '../models/todo.model';
 import { CreateTodoInput } from '../dto/create-todo-input';
+import { FindManyTodosService } from '../services/find-many-todos.service';
+import { CreateTodoService } from '../services/create-todo.service';
+import { TodoModel } from '../models/todo.model';
 
 @Resolver()
 export class TodoResolver {
   constructor(
-    private readonly findManyTodosUsecase: FindManyTodosUsecase,
-    private readonly createTodoUsecase: CreateTodoUsecase,
+    private readonly findManyTodosService: FindManyTodosService,
+    private readonly createTodoService: CreateTodoService,
   ) {}
 
-  @Query(() => [TodoModel], { description: 'Todo一覧取得' })
-  todos(): Promise<TodoModel[]> {
-    return this.findManyTodosUsecase.handle({});
+  @Query(() => [TodoModel])
+  async todos() {
+    return await this.findManyTodosService.handle({
+      userId: 1,
+    });
   }
 
-  @Mutation(() => TodoModel, { description: 'Todo作成' })
-  createTodo(
-    @Args('input', { type: () => CreateTodoInput })
-    input: Prisma.TodoUncheckedCreateInput,
-  ): Promise<TodoModel> {
-    return this.createTodoUsecase.handle({ input });
+  @Mutation(() => TodoModel)
+  async createTodo(
+    @Args('title') title: string,
+    @Args('description', { nullable: true }) description: string,
+  ) {
+    return await this.createTodoService.handle({
+      userId: 1,
+      title,
+      description,
+    });
   }
 }

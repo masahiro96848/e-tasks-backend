@@ -8,9 +8,6 @@ export class UserModel {
   @Field(() => String)
   name: string;
 
-  @Field(() => String)
-  email: string;
-
   @Field(() => Date)
   createdAt: Date;
 

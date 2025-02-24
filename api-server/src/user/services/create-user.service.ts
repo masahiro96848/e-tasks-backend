@@ -7,12 +7,19 @@ export class CreateUserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   handle({
-    input,
-    trx,
+    firebaseUId,
+    name,
   }: {
-    input: Prisma.UserUncheckedCreateInput;
-    trx?: Prisma.TransactionClient;
-  }): PrismaPromise<User> {
-    return this.userRepository.create({ input, trx });
+    firebaseUId: string;
+    name: string;
+  }): Promise<User> {
+    return this.userRepository.create({
+      input: {
+        firebaseUId,
+        name,
+        email: '',
+        password: '',
+      },
+    });
   }
 }

@@ -6,16 +6,21 @@ import { Prisma, PrismaPromise, Todo } from '@prisma/client';
 export class CreateTodoService {
   constructor(private readonly todoRepository: TodoRepository) {}
 
-  handle({
-    input,
-    trx,
+  async handle({
+    userId,
+    title,
+    description,
   }: {
-    input: Prisma.TodoUncheckedCreateInput;
-    trx?: Prisma.TransactionClient;
-  }): PrismaPromise<Todo> {
+    userId: number;
+    title: string;
+    description: string;
+  }): Promise<Todo> {
     return this.todoRepository.create({
-      input,
-      trx,
+      input: {
+        userId,
+        title,
+        description,
+      },
     });
   }
 }

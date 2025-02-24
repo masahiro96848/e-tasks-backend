@@ -1,16 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
-import { Prisma, User } from '@prisma/client';
+import { User } from '@prisma/client';
 
 @Injectable()
-export class FindUserService {
+export class FindFirebaseUserService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async handle({ id }: { id: number }): Promise<User> {
+  async handle({ uid }: { uid: string }): Promise<User> {
     return this.userRepository.findUniqueOrThrow({
-      input: {
-        id,
-      },
+      input: { firebaseUId: uid },
     });
   }
 }
