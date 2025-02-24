@@ -7,6 +7,7 @@ import { join } from 'path';
 import { TodoModule } from './todo/todo.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { UtilModule } from './util/util.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AuthModule } from './auth/auth.module';
     TodoModule,
     UserModule,
     AuthModule,
+    UtilModule,
   ],
   controllers: [AppController],
   providers: [AppService],
