@@ -11,7 +11,7 @@ export class CreateTodoService {
     title,
     description,
   }: {
-    userId: number;
+    userId: string;
     title: string;
     description: string;
   }): Promise<Todo> {

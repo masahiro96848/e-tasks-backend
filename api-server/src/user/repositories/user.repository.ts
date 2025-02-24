@@ -34,7 +34,7 @@ export class UserRepository {
     id,
     input,
   }: {
-    id: number;
+    id: string;
     input: Prisma.UserUncheckedUpdateInput;
   }): PrismaPromise<User> {
     return this.prisma.user.update({

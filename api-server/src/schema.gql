@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type TodoModel {
-  id: Int!
+  id: String!
   title: String!
   description: String
   completed: Boolean!
@@ -30,6 +30,6 @@ type Query {
 
 type Mutation {
   createTodo(title: String!, description: String): TodoModel!
-  createUser(name: String!, uid: String!, email: String!, password: String!): UserModel!
-  updateUser(id: Float!, name: String!): UserModel!
+  createUser(name: String!, uid: String!): UserModel!
+  updateUser(id: String!, name: String!): UserModel!
 }

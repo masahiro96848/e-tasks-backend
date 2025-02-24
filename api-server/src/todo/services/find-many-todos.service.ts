@@ -6,7 +6,7 @@ import { Prisma, Todo } from '@prisma/client';
 export class FindManyTodosService {
   constructor(private readonly todoRepository: TodoRepository) {}
 
-  async handle({ userId }: { userId: number }): Promise<Todo[]> {
+  async handle({ userId }: { userId: string }): Promise<Todo[]> {
     return await this.todoRepository.findMany({
       input: {
         userId,

@@ -1,10 +1,11 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { CreateTodoInput } from '../dto/create-todo-input';
 import { FindManyTodosService } from '../services/find-many-todos.service';
 import { CreateTodoService } from '../services/create-todo.service';
 import { TodoModel } from '../models/todo.model';
 import { UseGuards } from '@nestjs/common';
 import { FirebaseAuthGuard } from 'src/auth/firebase-auth.guard';
+import { UserEntity } from 'src/decorator/user.decorator';
+import { User } from '@prisma/client';
 
 @Resolver()
 export class TodoResolver {
@@ -15,20 +16,21 @@ export class TodoResolver {
 
   @Query(() => [TodoModel])
   @UseGuards(FirebaseAuthGuard)
-  async todos() {
+  async todos(@UserEntity('user') user: User) {
     return await this.findManyTodosService.handle({
-      userId: 1,
+      userId: user.id,
     });
   }
 
   @Mutation(() => TodoModel)
   @UseGuards(FirebaseAuthGuard)
   async createTodo(
+    @UserEntity('user') user: User,
     @Args('title') title: string,
     @Args('description', { nullable: true }) description: string,
-  ) {
+  ): Promise<TodoModel> {
     return await this.createTodoService.handle({
-      userId: 1,
+      userId: user.id,
       title,
       description,
     });

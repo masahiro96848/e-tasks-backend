@@ -6,7 +6,7 @@ import { Prisma, User } from '@prisma/client';
 export class FindUserService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async handle({ id }: { id: number }): Promise<User> {
+  async handle({ id }: { id: string }): Promise<User> {
     return this.userRepository.findUniqueOrThrow({
       input: {
         id,

@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class TodoModel {
@@ -9,14 +9,14 @@ export class TodoModel {
   title: string;
 
   @Field(() => String, { nullable: true })
-  description: string | null;
+  description?: string;
 
-  @Field(() => Boolean)
-  completed: boolean;
+  @Field(() => String)
+  userId: string;
 
   @Field(() => Date)
   createdAt: Date;
 
-  @Field(() => Date)
-  updatedAt: Date;
+  @Field(() => Date, { nullable: true })
+  updatedAt: Date | null;
 }

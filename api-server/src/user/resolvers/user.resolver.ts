@@ -17,27 +17,20 @@ export class UserResolver {
   @Query(() => UserModel)
   @UseGuards(FirebaseAuthGuard)
   async user(@Args('id') id: string) {
-    return this.findUserService.handle({ id: parseInt(id) });
+    return this.findUserService.handle({ id });
   }
 
   @Mutation(() => UserModel)
-  async createUser(
-    @Args('name') name: string,
-    @Args('uid') uid: string,
-    @Args('email') email: string,
-    @Args('password') password: string,
-  ) {
+  async createUser(@Args('name') name: string, @Args('uid') uid: string) {
     return this.createUserUsecase.handle({
       name,
       uid,
-      email,
-      password,
     });
   }
 
   @Mutation(() => UserModel)
   @UseGuards(FirebaseAuthGuard)
-  async updateUser(@Args('id') id: number, @Args('name') name: string) {
+  async updateUser(@Args('id') id: string, @Args('name') name: string) {
     return this.updateUserService.handle({
       id,
       name,

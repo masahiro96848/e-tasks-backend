@@ -29,6 +29,7 @@ import { FirebaseService } from 'src/util/firebase/firebase.service';
     FindByUidService,
     CreateUserUsecase,
     UpdateUserService,
+    FirebaseService,
   ],
 })
 export class UserModule {}
