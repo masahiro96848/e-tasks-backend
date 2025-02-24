@@ -8,6 +8,7 @@ import { UserRepository } from './repositories/user.repository';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { FindByUidService } from './services/fidn-by-uid.service';
 import { UpdateUserService } from './services/update-user.service';
+import { FirebaseService } from 'src/util/firebase/firebase.service';
 
 @Module({
   imports: [PrismaModule],
@@ -20,7 +21,14 @@ import { UpdateUserService } from './services/update-user.service';
     CreateUserService,
     CreateUserUsecase,
     UpdateUserService,
+    FirebaseService,
   ],
-  exports: [FindUserService, CreateUserService, FindByUidService],
+  exports: [
+    FindUserService,
+    CreateUserService,
+    FindByUidService,
+    CreateUserUsecase,
+    UpdateUserService,
+  ],
 })
 export class UserModule {}
