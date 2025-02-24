@@ -1,32 +1,27 @@
 import { Injectable } from '@nestjs/common';
+import { TodoRepository } from '../repositories/todo.repository';
 import { Prisma } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class TodoRepository {
-  constructor(private readonly prismaService: PrismaService) {}
+export class FindManyTodosService {
+  constructor(private readonly todoRepository: TodoRepository) {}
 
-  findWithInclude<T extends Prisma.TodoInclude>({
+  async handle<T extends Prisma.TodoInclude>({
     where,
     include,
-    skip,
-    take,
     orderBy,
     trx,
   }: {
     where?: Prisma.TodoWhereInput;
     include?: T;
-    skip?: number;
-    take?: number;
     orderBy?: Prisma.TodoOrderByWithRelationInput;
     trx?: Prisma.TransactionClient;
   }): Promise<Prisma.TodoGetPayload<{ include: T }>[]> {
-    return (trx ?? this.prismaService).todo.findMany({
+    return this.todoRepository.findWithInclude({
       where,
       include,
-      skip,
-      take,
       orderBy,
+      trx,
     });
   }
 }
