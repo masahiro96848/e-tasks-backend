@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
-import { Prisma, PrismaPromise, User } from '@prisma/client';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class CreateUserService {
@@ -9,16 +9,20 @@ export class CreateUserService {
   handle({
     firebaseUId,
     name,
+    email,
+    password,
   }: {
     firebaseUId: string;
     name: string;
+    email: string;
+    password: string;
   }): Promise<User> {
     return this.userRepository.create({
       input: {
         firebaseUId,
         name,
-        email: '',
-        password: '',
+        email,
+        password,
       },
     });
   }

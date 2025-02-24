@@ -6,10 +6,22 @@ import { Prisma, User } from '@prisma/client';
 export class CreateUserUsecase {
   constructor(private readonly createUserService: CreateUserService) {}
 
-  async handle({ name, uid }: { name: string; uid: string }): Promise<User> {
+  async handle({
+    name,
+    uid,
+    email,
+    password,
+  }: {
+    name: string;
+    uid: string;
+    email: string;
+    password: string;
+  }): Promise<User> {
     return this.createUserService.handle({
       name,
       firebaseUId: uid,
+      email,
+      password,
     });
   }
 }

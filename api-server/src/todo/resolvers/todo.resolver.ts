@@ -3,6 +3,8 @@ import { CreateTodoInput } from '../dto/create-todo-input';
 import { FindManyTodosService } from '../services/find-many-todos.service';
 import { CreateTodoService } from '../services/create-todo.service';
 import { TodoModel } from '../models/todo.model';
+import { UseGuards } from '@nestjs/common';
+import { FirebaseAuthGuard } from 'src/auth/firebase-auth.guard';
 
 @Resolver()
 export class TodoResolver {
@@ -12,6 +14,7 @@ export class TodoResolver {
   ) {}
 
   @Query(() => [TodoModel])
+  @UseGuards(FirebaseAuthGuard)
   async todos() {
     return await this.findManyTodosService.handle({
       userId: 1,
@@ -19,6 +22,7 @@ export class TodoResolver {
   }
 
   @Mutation(() => TodoModel)
+  @UseGuards(FirebaseAuthGuard)
   async createTodo(
     @Args('title') title: string,
     @Args('description', { nullable: true }) description: string,

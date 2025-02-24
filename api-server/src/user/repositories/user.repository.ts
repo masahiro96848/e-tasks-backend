@@ -4,14 +4,14 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class UserRepository {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   findUniqueOrThrow({
     input,
   }: {
     input: Prisma.UserWhereUniqueInput;
   }): PrismaPromise<User> {
-    return this.prismaService.user.findUniqueOrThrow({
+    return this.prisma.user.findUniqueOrThrow({
       where: {
         ...input,
       },
@@ -23,7 +23,24 @@ export class UserRepository {
   }: {
     input: Prisma.UserUncheckedCreateInput;
   }): PrismaPromise<User> {
-    return this.prismaService.user.create({
+    return this.prisma.user.create({
+      data: {
+        ...input,
+      },
+    });
+  }
+
+  update({
+    id,
+    input,
+  }: {
+    id: number;
+    input: Prisma.UserUncheckedUpdateInput;
+  }): PrismaPromise<User> {
+    return this.prisma.user.update({
+      where: {
+        id,
+      },
       data: {
         ...input,
       },
