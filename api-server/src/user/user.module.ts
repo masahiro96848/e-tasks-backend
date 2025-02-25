@@ -9,6 +9,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { FindByUidService } from './services/fidn-by-uid.service';
 import { UpdateUserService } from './services/update-user.service';
 import { FirebaseService } from 'src/util/firebase/firebase.service';
+import { DeleteUserService } from './services/delete-user.service';
+import { DeleteUserUsecase } from './usecase/delete-user.usecase';
 
 @Module({
   imports: [PrismaModule],
@@ -22,6 +24,8 @@ import { FirebaseService } from 'src/util/firebase/firebase.service';
     CreateUserUsecase,
     UpdateUserService,
     FirebaseService,
+    DeleteUserService,
+    DeleteUserUsecase,
   ],
   exports: [
     FindUserService,
@@ -30,6 +34,8 @@ import { FirebaseService } from 'src/util/firebase/firebase.service';
     CreateUserUsecase,
     UpdateUserService,
     FirebaseService,
+    DeleteUserService,
+    DeleteUserUsecase,
   ],
 })
 export class UserModule {}

@@ -46,4 +46,12 @@ export class UserRepository {
       },
     });
   }
+
+  delete({ id }: { id: string }): PrismaPromise<User> {
+    return this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }
