@@ -7,6 +7,7 @@ type TodoModel {
   title: String!
   description: String
   completed: Boolean!
+  userId: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -17,8 +18,9 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type UserModel {
-  id: String!
   name: String!
+  email: String!
+  firebaseUId: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -29,8 +31,21 @@ type Query {
 }
 
 type Mutation {
-  createTodo(title: String!, description: String): TodoModel!
-  createUser(name: String!, uid: String!): UserModel!
+  createTodo(input: CreateTodoInput!): TodoModel!
+  createUser(input: CreateUserInput!): UserModel!
   updateUser(id: String!, name: String!): UserModel!
   deleteUser(id: String!): UserModel!
+}
+
+input CreateTodoInput {
+  title: String!
+  description: String
+  userId: String!
+}
+
+input CreateUserInput {
+  name: String!
+  firebaseUId: String!
+  email: String!
+  password: String!
 }

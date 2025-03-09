@@ -8,6 +8,7 @@ import { TodoModule } from './todo/todo.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { UtilModule } from './util/util.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UtilModule } from './util/util.module';
     UserModule,
     AuthModule,
     UtilModule,
+    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

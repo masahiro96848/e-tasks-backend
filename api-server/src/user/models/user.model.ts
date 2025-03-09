@@ -3,9 +3,6 @@ import { Field, HideField, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class UserModel {
   @Field(() => String)
-  id: string;
-
-  @Field(() => String)
   name: string;
 
   @Field(() => String)
@@ -13,6 +10,9 @@ export class UserModel {
 
   @HideField()
   password: string;
+
+  @Field(() => String)
+  firebaseUId: string;
 
   @Field(() => Date)
   createdAt: Date;

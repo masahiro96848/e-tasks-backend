@@ -14,6 +14,9 @@ export class TodoModel {
   @Field(() => Boolean)
   completed: boolean;
 
+  @Field(() => String)
+  userId: string;
+
   @Field(() => Date)
   createdAt: Date;
 

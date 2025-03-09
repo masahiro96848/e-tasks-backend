@@ -19,7 +19,7 @@ model User {
   name String @db.VarChar(255)
   email String @unique @db.VarChar(255)
   password String @db.VarChar(255)
-  firebaseUId String   @unique
+  firebaseUId String?   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -33,6 +33,6 @@ model Todo {
   completed Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId String
+  userId String @unique
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

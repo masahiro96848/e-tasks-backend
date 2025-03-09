@@ -6,6 +6,7 @@ import { UseGuards } from '@nestjs/common';
 import { FirebaseAuthGuard } from 'src/auth/firebase-auth.guard';
 import { UserEntity } from 'src/decorator/user.decorator';
 import { User } from '@prisma/client';
+import { CreateTodoInput } from '../dto/create-todo.input';
 
 @Resolver()
 export class TodoResolver {
@@ -26,13 +27,12 @@ export class TodoResolver {
   @UseGuards(FirebaseAuthGuard)
   async createTodo(
     @UserEntity('user') user: User,
-    @Args('title') title: string,
-    @Args('description', { nullable: true }) description: string,
+    @Args('input') input: CreateTodoInput,
   ): Promise<TodoModel> {
     return await this.createTodoService.handle({
       userId: user.id,
-      title,
-      description,
+      title: input.title,
+      description: input.description,
     });
   }
 }

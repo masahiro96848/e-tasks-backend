@@ -12,23 +12,25 @@ export class CreateUserUsecase {
 
   async handle({
     name,
-    uid,
+    firebaseUId,
     email,
     password,
   }: {
     name: string;
-    uid: string;
+    firebaseUId: string;
     email: string;
     password: string;
   }): Promise<User> {
-    const firebaseUser = await this.firebaseService.findByUid({ uid });
+    const firebaseUser = await this.firebaseService.findByUid({
+      uid: firebaseUId,
+    });
     if (!firebaseUser) {
       throw new Error('存在しないユーザーです');
     }
 
     return this.createUserService.handle({
       name,
-      firebaseUId: uid,
+      firebaseUId: firebaseUId,
       email: email,
       password: password,
     });
