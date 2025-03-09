@@ -10,14 +10,27 @@ export class CreateUserUsecase {
     private readonly firebaseService: FirebaseService,
   ) {}
 
-  async handle({ name, uid }: { name: string; uid: string }): Promise<User> {
+  async handle({
+    name,
+    uid,
+    email,
+    password,
+  }: {
+    name: string;
+    uid: string;
+    email: string;
+    password: string;
+  }): Promise<User> {
     const firebaseUser = await this.firebaseService.findByUid({ uid });
     if (!firebaseUser) {
       throw new Error('存在しないユーザーです');
     }
+
     return this.createUserService.handle({
       name,
       firebaseUId: uid,
+      email: email,
+      password: password,
     });
   }
 }
