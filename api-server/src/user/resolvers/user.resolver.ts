@@ -3,7 +3,7 @@ import { UserModel } from '../models/user.model';
 import { CreateUserUsecase } from '../usecase/create-user.usecase';
 import { FindUserService } from '../services/find-user.service';
 import { UseGuards } from '@nestjs/common';
-import { FirebaseAuthGuard } from 'src/auth/firebase-auth.guard';
+import { FirebaseAuthGuard } from 'src/lib/firebase/firebase-auth.guard';
 import { UpdateUserService } from '../services/update-user.service';
 import { DeleteUserUsecase } from '../usecase/delete-user.usecase';
 import { CreateUserInput } from '../dto/create-user.input';
