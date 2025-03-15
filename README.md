@@ -3,7 +3,7 @@
 ### ディレクトリを変更
 
 ```
-cd nest_prisma_template/api-server/
+cd nest_prisma_graphql_firebase_backend/api-server/
 ```
 
 ### .env を作成
@@ -42,16 +42,10 @@ npm install
 npx prisma migrate dev --name init
 ```
 
-### seed データを投入
-
-```
-npm run seed
-```
-
 ### prisma studio 起動
 
 ```
-npx prisma studio
+npm run studio
 ```
 
 http://localhost:5555/
@@ -63,5 +57,5 @@ SequelAce などの GUI のツールを使って確認。
 ### サーバー起動(backend コンテナに入って)
 
 ```
-npm run start:dev
+npm run start
 ```
