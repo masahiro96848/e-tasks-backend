@@ -8,6 +8,8 @@ import { SignUpService } from './services/sign-up.service';
 import { SignUpUsecase } from './usecases/sign-up.usecase';
 import { AuthRepository } from './repositories/auth.repositories';
 import { PrismaModule } from 'src/prisma/prisma.module';
+import { SignInService } from './services/sign-in.service';
+import { SignInUsecase } from './usecases/sign-in.usecase';
 
 @Module({
   imports: [UserModule, PassportModule, PrismaModule],
@@ -18,6 +20,8 @@ import { PrismaModule } from 'src/prisma/prisma.module';
     AuthResolver,
     SignUpService,
     SignUpUsecase,
+    SignInService,
+    SignInUsecase,
   ],
 })
 export class AuthModule {}

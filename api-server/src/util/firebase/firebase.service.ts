@@ -17,4 +17,12 @@ export class FirebaseService {
   async delete({ uid }: { uid: string }): Promise<void> {
     await admin.auth().deleteUser(uid);
   }
+
+  async findByEmail({ email }: { email: string }): Promise<UserRecord | null> {
+    try {
+      return await admin.auth().getUserByEmail(email);
+    } catch (e) {
+      return null;
+    }
+  }
 }

@@ -33,6 +33,7 @@ type Query {
 type Mutation {
   createTodo(input: CreateTodoInput!): TodoModel!
   signUp(input: CreateSignUpInput!): UserModel!
+  signIn(email: String!, password: String!): UserModel!
 }
 
 input CreateTodoInput {
