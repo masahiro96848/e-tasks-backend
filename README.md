@@ -50,12 +50,18 @@ npm run studio
 
 http://localhost:5555/
 
-User テーブルが出来ていることを確認。データが入っていることを確認
-
-SequelAce などの GUI のツールを使って確認。
-
 ### サーバー起動(backend コンテナに入って)
 
 ```
 npm run start
 ```
+
+### サーバー起動確認
+
+```
+Hello Worldが表示していることを確認
+```
+
+### graphql playground
+
+http://localhost:8080/graphql
