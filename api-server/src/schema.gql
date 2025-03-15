@@ -32,9 +32,7 @@ type Query {
 
 type Mutation {
   createTodo(input: CreateTodoInput!): TodoModel!
-  createUser(input: CreateUserInput!): UserModel!
-  updateUser(id: String!, name: String!): UserModel!
-  deleteUser(id: String!): UserModel!
+  signUp(input: CreateSignUpInput!): UserModel!
 }
 
 input CreateTodoInput {
@@ -43,7 +41,7 @@ input CreateTodoInput {
   userId: String!
 }
 
-input CreateUserInput {
+input CreateSignUpInput {
   name: String!
   firebaseUId: String!
   email: String!
