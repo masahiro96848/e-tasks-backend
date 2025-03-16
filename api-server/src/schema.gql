@@ -26,17 +26,24 @@ type UserModel {
 }
 
 type Query {
+  todo(id: String!): TodoModel!
   todos: [TodoModel!]!
   user(id: String!): UserModel!
 }
 
 type Mutation {
   createTodo(input: CreateTodoInput!): TodoModel!
+  updateTodo(id: String!, input: UpdateTodoInput!): TodoModel!
   signUp(input: CreateSignUpInput!): UserModel!
   signIn(email: String!, password: String!): UserModel!
 }
 
 input CreateTodoInput {
+  title: String!
+  description: String
+}
+
+input UpdateTodoInput {
   title: String!
   description: String
 }
