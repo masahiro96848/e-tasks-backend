@@ -7,7 +7,4 @@ export class CreateTodoInput {
 
   @Field(() => String, { nullable: true })
   description?: string;
-
-  @Field(() => String)
-  userId: string;
 }

@@ -39,7 +39,6 @@ type Mutation {
 input CreateTodoInput {
   title: String!
   description: String
-  userId: String!
 }
 
 input CreateSignUpInput {

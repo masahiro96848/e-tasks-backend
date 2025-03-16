@@ -31,9 +31,10 @@ export class TodoResolver {
     @Args('input') input: CreateTodoInput,
   ): Promise<TodoModel> {
     return await this.createTodoService.handle({
-      userId: user.id,
-      title: input.title,
-      description: input.description,
+      input: {
+        ...input,
+        userId: user.id,
+      },
     });
   }
 }
