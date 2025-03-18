@@ -6,6 +6,7 @@ import { FindManyTodosService } from './services/find-many-todos.service';
 import { CreateTodoService } from './services/create-todo.service';
 import { UpdateTodoService } from './services/update-todo.service';
 import { FindTodoService } from './services/find-todo.service';
+import { DeleteTodoService } from './services/delete-todo.service';
 
 @Module({
   imports: [PrismaModule],
@@ -16,6 +17,7 @@ import { FindTodoService } from './services/find-todo.service';
     FindManyTodosService,
     CreateTodoService,
     UpdateTodoService,
+    DeleteTodoService,
   ],
   exports: [TodoRepository],
 })

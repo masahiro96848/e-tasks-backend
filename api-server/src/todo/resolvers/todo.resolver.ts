@@ -11,6 +11,7 @@ import { UserEntity } from 'src/lib/firebase/decorator/user.decorator';
 import { UpdateTodoService } from '../services/update-todo.service';
 import { UpdateTodoInput } from '../dto/update-todo.input';
 import { FindTodoService } from '../services/find-todo.service';
+import { DeleteTodoService } from '../services/delete-todo.service';
 
 @Resolver()
 export class TodoResolver {
@@ -19,6 +20,7 @@ export class TodoResolver {
     private readonly findManyTodosService: FindManyTodosService,
     private readonly createTodoService: CreateTodoService,
     private readonly updateTodoService: UpdateTodoService,
+    private readonly deleteTodoService: DeleteTodoService,
   ) {}
 
   @Query(() => TodoModel)
@@ -64,6 +66,17 @@ export class TodoResolver {
         ...input,
         userId: user.id,
       },
+    });
+  }
+
+  @Mutation(() => TodoModel)
+  @UseGuards(FirebaseAuthGuard)
+  async deleteTodo(
+    @UserEntity('user') user: User,
+    @Args('id') id: string,
+  ): Promise<TodoModel> {
+    return await this.deleteTodoService.handle({
+      id,
     });
   }
 }

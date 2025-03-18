@@ -50,4 +50,12 @@ export class TodoRepository {
       data: input,
     });
   }
+
+  delete({ id }: { id: string }): PrismaPromise<Todo> {
+    return this.prisma.todo.delete({
+      where: {
+        id: id as string,
+      },
+    });
+  }
 }
