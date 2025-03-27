@@ -12,6 +12,7 @@ import { UpdateTodoService } from '../services/update-todo.service';
 import { UpdateTodoInput } from '../dto/update-todo.input';
 import { FindTodoService } from '../services/find-todo.service';
 import { DeleteTodoService } from '../services/delete-todo.service';
+import { UpdateCompletedUsecase } from '../usecases/update-completed.usecase';
 
 @Resolver()
 export class TodoResolver {
@@ -21,6 +22,7 @@ export class TodoResolver {
     private readonly createTodoService: CreateTodoService,
     private readonly updateTodoService: UpdateTodoService,
     private readonly deleteTodoService: DeleteTodoService,
+    private readonly updateCompletedUsecase: UpdateCompletedUsecase,
   ) {}
 
   @Query(() => TodoModel)
@@ -67,6 +69,16 @@ export class TodoResolver {
         userId: user.id,
       },
     });
+  }
+
+  @Mutation(() => TodoModel)
+  @UseGuards(FirebaseAuthGuard)
+  async updateCompleted(
+    @UserEntity('user') user: User,
+    @Args('id') id: string,
+    @Args('completed') completed: boolean,
+  ): Promise<TodoModel> {
+    return await this.updateCompletedUsecase.handle({ id, completed });
   }
 
   @Mutation(() => TodoModel)
