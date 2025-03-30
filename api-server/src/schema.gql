@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type TodoModel {
+type TaskModel {
   id: String!
   title: String!
   description: String
@@ -26,28 +26,14 @@ type UserModel {
 }
 
 type Query {
-  todo(id: String!): TodoModel!
-  todos: [TodoModel!]!
+  task(id: String!): TaskModel!
+  tasks: [TaskModel!]!
   user(id: String!): UserModel!
 }
 
 type Mutation {
-  createTodo(input: CreateTodoInput!): TodoModel!
-  updateTodo(id: String!, input: UpdateTodoInput!): TodoModel!
-  updateCompleted(id: String!, completed: Boolean!): TodoModel!
-  deleteTodo(id: String!): TodoModel!
   signUp(input: CreateSignUpInput!): UserModel!
   signIn(email: String!, password: String!): UserModel!
-}
-
-input CreateTodoInput {
-  title: String!
-  description: String
-}
-
-input UpdateTodoInput {
-  title: String!
-  description: String
 }
 
 input CreateSignUpInput {
