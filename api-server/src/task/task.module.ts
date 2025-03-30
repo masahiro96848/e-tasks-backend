@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { TaskResolver } from './resolvers/task.resolver';
+import { TaskResolver } from './taskList/resolvers/task.resolver';
 import { PrismaModule } from 'src/prisma/prisma.module';
-import { TaskRepository } from './repositories/task.repository';
-import { FindManyTasksService } from './services/find-many-tasks.service';
-import { CreateTaskService } from './services/create-task.service';
-import { UpdateTaskService } from './services/update-task.service';
-import { UpdateCompletedUsecase } from './usecases/update-completed.usecase';
-import { FindTaskService } from './services/find-task.service';
-import { DeleteTaskService } from './services/delete-task.service';
+import { TaskRepository } from './taskList/repositories/task.repository';
+import { FindManyTasksService } from './taskList/services/find-many-tasks.service';
+import { CreateTaskService } from './taskList/services/create-task.service';
+import { UpdateTaskService } from './taskList/services/update-task.service';
+import { UpdateCompletedUsecase } from './taskList/usecases/update-completed.usecase';
+import { FindTaskService } from './taskList/services/find-task.service';
+import { DeleteTaskService } from './taskList/services/delete-task.service';
 
 @Module({
   imports: [PrismaModule],
