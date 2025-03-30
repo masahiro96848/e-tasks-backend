@@ -22,13 +22,13 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  tasks Task[]
-  folders   Folder[]
+  taskItems TaskItem[]
+  taskFolders TaskFolder[]
   taskCards TaskCard[]
-  labels    Label[]
+  taskLabels TaskLabel[]
 }
 
-model Task {
+model TaskItem {
   id          String    @id @default(uuid())
   title       String
   description String?
@@ -40,7 +40,7 @@ model Task {
   taskCard    TaskCard  @relation(fields: [taskCardId], references: [id])
   userId      String
   user        User      @relation(fields: [userId], references: [id])
-  labels      Label[]
+  taskLabels      TaskLabel[]
   completedAt DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -49,7 +49,7 @@ model Task {
   @@index([userId])
 }
 
-model Folder {
+model TaskFolder {
   id        String     @id @default(uuid())
   name      String
   color     String?
@@ -69,9 +69,9 @@ model TaskCard {
   isArchived Boolean @default(false)
   folderId  String
   userId    String
-  folder    Folder   @relation(fields: [folderId], references: [id])
+  folder    TaskFolder   @relation(fields: [folderId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
-  tasks     Task[]
+  taskItems TaskItem[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -79,13 +79,13 @@ model TaskCard {
   @@index([userId])
 }
 
-model Label {
+model TaskLabel {
   id        String   @id @default(uuid())
   name      String
   color     String
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  tasks     Task[]
+  taskItems TaskItem[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

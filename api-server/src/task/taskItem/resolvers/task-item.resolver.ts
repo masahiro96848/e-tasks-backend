@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 
-import { TaskModel } from '../models/task.model';
+import { TaskItemModel } from '../models/task-item.model';
 import { UseGuards } from '@nestjs/common';
 import { FirebaseAuthGuard } from 'src/lib/firebase/firebase-auth.guard';
 
@@ -10,35 +10,35 @@ import { UserEntity } from 'src/lib/firebase/decorator/user.decorator';
 
 import { UpdateTaskInput } from '../dto/update-task.input';
 import { UpdateCompletedUsecase } from '../usecases/update-completed.usecase';
-import { DeleteTaskService } from '../services/delete-task.service';
-import { FindManyTasksService } from '../services/find-many-tasks.service';
-import { FindTaskService } from '../services/find-task.service';
-import { UpdateTaskService } from '../services/update-task.service';
-import { CreateTaskService } from '../services/create-task.service';
+import { DeleteTaskItemService } from '../services/delete-task-item.service';
+import { FindManyTaskItemsService } from '../services/find-many-task-items.service';
+import { FindTaskItemService } from '../services/find-task-item.service';
+import { UpdateTaskItemService } from '../services/update-task-item.service';
+import { CreateTaskItemService } from '../services/create-task-item.service';
 
 @Resolver()
-export class TaskResolver {
+export class TaskItemResolver {
   constructor(
-    private readonly findTaskService: FindTaskService,
-    private readonly findManyTasksService: FindManyTasksService,
-    private readonly createTaskService: CreateTaskService,
-    private readonly updateTaskService: UpdateTaskService,
-    private readonly deleteTaskService: DeleteTaskService,
+    private readonly findTaskItemService: FindTaskItemService,
+    private readonly findManyTaskItemsService: FindManyTaskItemsService,
+    private readonly createTaskItemService: CreateTaskItemService,
+    private readonly updateTaskItemService: UpdateTaskItemService,
+    private readonly deleteTaskItemService: DeleteTaskItemService,
     private readonly updateCompletedUsecase: UpdateCompletedUsecase,
   ) {}
 
-  @Query(() => TaskModel)
+  @Query(() => TaskItemModel)
   @UseGuards(FirebaseAuthGuard)
-  async task(@UserEntity('user') user: User, @Args('id') id: string) {
-    return await this.findTaskService.handle({
+  async taskItem(@UserEntity('user') user: User, @Args('id') id: string) {
+    return await this.findTaskItemService.handle({
       where: { id, userId: user.id },
     });
   }
 
-  @Query(() => [TaskModel])
+  @Query(() => [TaskItemModel])
   @UseGuards(FirebaseAuthGuard)
-  async tasks(@UserEntity('user') user: User) {
-    return await this.findManyTasksService.handle({
+  async taskItems(@UserEntity('user') user: User) {
+    return await this.findManyTaskItemsService.handle({
       userId: user.id,
     });
   }

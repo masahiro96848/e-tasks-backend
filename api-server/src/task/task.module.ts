@@ -1,26 +1,29 @@
 import { Module } from '@nestjs/common';
-import { TaskResolver } from './taskList/resolvers/task.resolver';
 import { PrismaModule } from 'src/prisma/prisma.module';
-import { TaskRepository } from './taskList/repositories/task.repository';
-import { FindManyTasksService } from './taskList/services/find-many-tasks.service';
-import { CreateTaskService } from './taskList/services/create-task.service';
-import { UpdateTaskService } from './taskList/services/update-task.service';
-import { UpdateCompletedUsecase } from './taskList/usecases/update-completed.usecase';
-import { FindTaskService } from './taskList/services/find-task.service';
-import { DeleteTaskService } from './taskList/services/delete-task.service';
-
+import { PrismaService } from 'src/prisma/prisma.service';
+import { TaskItemRepository } from './taskItem/repositories/task-item.repository';
+import { TaskItemResolver } from './taskItem/resolvers/task-item.resolver';
+import { CreateTaskItemService } from './taskItem/services/create-task-item.service';
+import { DeleteTaskItemService } from './taskItem/services/delete-task-item.service';
+import { FindManyTaskItemsService } from './taskItem/services/find-many-task-items.service';
+import { FindTaskItemService } from './taskItem/services/find-task-item.service';
+import { UpdateTaskItemService } from './taskItem/services/update-task-item.service';
+import { UpdateCompletedUsecase } from './taskItem/usecases/update-completed.usecase';
+import { TaskFolderRepository } from './taskFolder/repositories/task-folder.repository';
 @Module({
   imports: [PrismaModule],
   providers: [
-    TaskRepository,
-    TaskResolver,
-    FindTaskService,
-    FindManyTasksService,
-    CreateTaskService,
-    UpdateTaskService,
-    DeleteTaskService,
+    PrismaService,
+    TaskItemRepository,
+    TaskItemResolver,
+    FindTaskItemService,
+    FindManyTaskItemsService,
+    CreateTaskItemService,
+    UpdateTaskItemService,
+    DeleteTaskItemService,
     UpdateCompletedUsecase,
+    TaskFolderRepository,
   ],
-  exports: [TaskRepository],
+  exports: [TaskItemRepository, TaskFolderRepository],
 })
 export class TaskModule {}

@@ -14,7 +14,7 @@ CREATE TABLE `User` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Task` (
+CREATE TABLE `TaskItem` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
@@ -28,13 +28,13 @@ CREATE TABLE `Task` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
-    INDEX `Task_taskCardId_idx`(`taskCardId`),
-    INDEX `Task_userId_idx`(`userId`),
+    INDEX `TaskItem_taskCardId_idx`(`taskCardId`),
+    INDEX `TaskItem_userId_idx`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Folder` (
+CREATE TABLE `TaskFolder` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `color` VARCHAR(191) NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `TaskCard` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Label` (
+CREATE TABLE `TaskLabel` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `color` VARCHAR(191) NOT NULL,
@@ -71,39 +71,39 @@ CREATE TABLE `Label` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
-    INDEX `Label_userId_idx`(`userId`),
+    INDEX `TaskLabel_userId_idx`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `_LabelToTask` (
+CREATE TABLE `_TaskItemToTaskLabel` (
     `A` VARCHAR(191) NOT NULL,
     `B` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `_LabelToTask_AB_unique`(`A`, `B`),
-    INDEX `_LabelToTask_B_index`(`B`)
+    UNIQUE INDEX `_TaskItemToTaskLabel_AB_unique`(`A`, `B`),
+    INDEX `_TaskItemToTaskLabel_B_index`(`B`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `Task` ADD CONSTRAINT `Task_taskCardId_fkey` FOREIGN KEY (`taskCardId`) REFERENCES `TaskCard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `TaskItem` ADD CONSTRAINT `TaskItem_taskCardId_fkey` FOREIGN KEY (`taskCardId`) REFERENCES `TaskCard`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Task` ADD CONSTRAINT `Task_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `TaskItem` ADD CONSTRAINT `TaskItem_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Folder` ADD CONSTRAINT `Folder_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `TaskFolder` ADD CONSTRAINT `TaskFolder_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `TaskCard` ADD CONSTRAINT `TaskCard_folderId_fkey` FOREIGN KEY (`folderId`) REFERENCES `Folder`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `TaskCard` ADD CONSTRAINT `TaskCard_folderId_fkey` FOREIGN KEY (`folderId`) REFERENCES `TaskFolder`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `TaskCard` ADD CONSTRAINT `TaskCard_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Label` ADD CONSTRAINT `Label_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `TaskLabel` ADD CONSTRAINT `TaskLabel_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `_LabelToTask` ADD CONSTRAINT `_LabelToTask_A_fkey` FOREIGN KEY (`A`) REFERENCES `Label`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `_TaskItemToTaskLabel` ADD CONSTRAINT `_TaskItemToTaskLabel_A_fkey` FOREIGN KEY (`A`) REFERENCES `TaskItem`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `_LabelToTask` ADD CONSTRAINT `_LabelToTask_B_fkey` FOREIGN KEY (`B`) REFERENCES `Task`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `_TaskItemToTaskLabel` ADD CONSTRAINT `_TaskItemToTaskLabel_B_fkey` FOREIGN KEY (`B`) REFERENCES `TaskLabel`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
