@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type TaskModel {
+type TaskItemModel {
   id: String!
   title: String!
   description: String
@@ -26,8 +26,8 @@ type UserModel {
 }
 
 type Query {
-  task(id: String!): TaskModel!
-  tasks: [TaskModel!]!
+  taskItem(id: String!): TaskItemModel!
+  taskItems: [TaskItemModel!]!
   user(id: String!): UserModel!
 }
 
