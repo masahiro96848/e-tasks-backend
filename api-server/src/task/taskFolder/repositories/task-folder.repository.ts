@@ -17,6 +17,34 @@ export class TaskFolderRepository {
       where: {
         id: where.id as string,
       },
+      include: {
+        user: true,
+      },
+    });
+  }
+
+  findMany({
+    where,
+  }: {
+    where: Prisma.TaskFolderWhereInput;
+  }): PrismaPromise<TaskFolder[]> {
+    return this.prisma.taskFolder.findMany({
+      where,
+      include: {
+        user: true,
+      },
+    });
+  }
+
+  create({
+    input,
+  }: {
+    input: Prisma.TaskFolderUncheckedCreateInput;
+  }): PrismaPromise<TaskFolder> {
+    return this.prisma.taskFolder.create({
+      data: {
+        ...input,
+      },
     });
   }
 }
