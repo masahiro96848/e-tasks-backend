@@ -5,10 +5,10 @@ import { UseGuards } from '@nestjs/common';
 import { FirebaseAuthGuard } from 'src/lib/firebase/firebase-auth.guard';
 
 import { User } from '@prisma/client';
-import { CreateTaskInput } from '../dto/create-task.input';
+import { CreateTaskInput } from '../dto/create-task-item.input';
 import { UserEntity } from 'src/lib/firebase/decorator/user.decorator';
 
-import { UpdateTaskInput } from '../dto/update-task.input';
+import { UpdateTaskInput } from '../dto/update-task-item.input';
 import { UpdateCompletedUsecase } from '../usecases/update-completed.usecase';
 import { DeleteTaskItemService } from '../services/delete-task-item.service';
 import { FindManyTaskItemsService } from '../services/find-many-task-items.service';
